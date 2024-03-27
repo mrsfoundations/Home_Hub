@@ -10,13 +10,18 @@ class LastBookingScreen extends StatelessWidget {
   final String time;
   final String weekday;
   final String date;
-
+  // final serviceName ;
+  final String serviceprovider ;
+  final String name;
   const LastBookingScreen({
     Key? key,
     this.cancel = false,
     this.time = "07:15",
     this.weekday = "Thursday",
     this.date = "4 january,2022",
+    this.name = "Arun",
+    this.serviceprovider = "Homehub",
+
   }) : super(key: key);
 
   @override
@@ -71,6 +76,18 @@ class LastBookingScreen extends StatelessWidget {
               Space(32),
               Text(
                 cancel ? "Your booking has been cancelled successfully" : "Your booking has been confirmed for $date",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14, color: greyColor),
+              ),
+              Space(32),
+              Text(
+                cancel ? "Service Name" : "Service Name $name",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14, color: greyColor),
+              ),
+              Space(32),
+              Text(
+                cancel ? "Service Provider" : "Service Provider $serviceprovider",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14, color: greyColor),
               ),

@@ -19,7 +19,6 @@ class ServiceScreen extends StatefulWidget {
   final bool fromBooking;
   final int serviceIndex;
   final int providerIndex;
-
   const ServiceScreen({
     Key? key,
     this.index = 0,
@@ -171,6 +170,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
                             fromBooking: widget.fromBooking,
                             renovateIndex: widget.index,
                             fromRenovate: widget.fromRenovate,
+                            name:serviceProviders[widget.index].serviceProviders[0].name,
+                            price:serviceProviders[widget.serviceIndex].serviceProviders[widget.providerIndex].providerServices[widget.index].servicePrice,
                           ),
                         ),
                       );

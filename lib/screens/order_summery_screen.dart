@@ -11,21 +11,25 @@ import '../utils/colors.dart';
 class OrderSummeryScreen extends StatefulWidget {
   final String area;
   final String bHK;
+  final String name;
   final String weekday;
   final List<ActiveBookingsModel> list;
   final bool fromBooking;
   final bool fromRenovate;
   final int renovateIndex;
+  final int price;
 
   OrderSummeryScreen({
     Key? key,
     this.area = "1590",
+    this.name = "Arun",
     this.bHK = "3 BHK",
     this.weekday = "Thursday",
     required this.list,
     this.fromBooking = false,
     this.fromRenovate = false,
     this.renovateIndex = 0,
+    this.price = 0,
   }) : super(key: key);
 
   @override
@@ -35,7 +39,8 @@ class OrderSummeryScreen extends StatefulWidget {
 class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
   int index = 0;
   int itemCount = 1;
-  int price = 0;
+  int totprice = 0;
+  late int highprice;
 
   @override
   void initState() {
@@ -48,8 +53,8 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
         widget.list[0].serviceImage = combosServices[widget.renovateIndex].imagePath!;
       }
     }
-    price = widget.list[0].price - 40 + 160;
-    widget.list[0].price = price;
+    totprice = widget.price + 40 - 160;
+    highprice = totprice;
     super.initState();
   }
 
@@ -84,7 +89,7 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "\$ ${price.toString()}",
+                    "\$ ${highprice.toString()}",
                     style: TextStyle(
                       color: appData.isDark ? bottomContainerTextDark : bottomContainerText,
                       fontWeight: FontWeight.bold,
@@ -99,6 +104,7 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
                           builder: (context) => PaymentScreen(
                             weekday: widget.weekday == "" ? "Thursday" : widget.weekday,
                             list: widget.list,
+                            name:widget.name,
                           ),
                         ),
                       );
@@ -157,7 +163,7 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
                                 ),
                                 Space(8),
                                 Text(
-                                  widget.list[index].name,
+                                  widget.name,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(color: appData.isDark ? cardTextDark : cardText, fontSize: 12),
                                 ),
@@ -227,7 +233,7 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
                           child: Row(
                             children: [
                               Text(
-                                widget.area != "" ? "${widget.area} Sqft" : "2000 Sqft",
+                                widget.area != "" ? "${widget.area} Sqft" : "1000 Sqft",
                                 style: TextStyle(
                                   color: appData.isDark ? cardTextDark : cardText,
                                   fontSize: 14,
@@ -246,7 +252,7 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
                             ],
                           ),
                         ),
-                        Text("₹${widget.list[index].price}", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
+                        Text("₹${widget.price}", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
                       ],
                     ),
                   ],
@@ -342,7 +348,7 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
                             textAlign: TextAlign.start,
                             style: TextStyle(color: appData.isDark ? cardTextDark : cardText, fontWeight: FontWeight.bold, fontSize: 14),
                           ),
-                          trailing: Text("₹${widget.list[0].price}", textAlign: TextAlign.start, style: TextStyle(fontSize: 14)),
+                          trailing: Text("₹${widget.price}", textAlign: TextAlign.start, style: TextStyle(fontSize: 14)),
                         ),
                         ListTile(
                           title: Text(
@@ -366,7 +372,7 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
                     ListTile(
                       title: Text("Total", textAlign: TextAlign.start, style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
                       trailing: Text(
-                        "₹${price.toString()}",
+                        "₹${highprice.toString()}",
                         textAlign: TextAlign.start,
                         style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
                       ),
