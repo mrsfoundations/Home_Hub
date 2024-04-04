@@ -153,12 +153,12 @@ class _FavoriteServiceComponentState extends State<FavoriteServiceComponent> {
                               ElevatedButton(
                                 child: Text("Book",style: TextStyle(color: Colors.white)),
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ProviderServicesScreen(serviceIndex: widget.index, index: widget.index),
-                                    ),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => ProviderServicesScreen(serviceIndex: widget.index, index: widget.index),
+                                  //   ),
+                                  // );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   shape: StadiumBorder(),

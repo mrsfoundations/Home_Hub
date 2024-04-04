@@ -52,27 +52,15 @@ class _HomeServiceComponentState extends State<HomeServiceComponent> {
               }
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(40),
                     child: Container(
-                      padding: EdgeInsets.all(16),
-                      color: serviceProviders[index].isSelected ? blackColor : textFieldColor,
-                      child: Observer(
-                        builder: (context) {
-                          return Icon(
-                            serviceProviders[index].serviceIcon,
-                            size: 28,
-                            color: appData.isDark
-                                ? Colors.white
-                                : serviceProviders[index].isSelected
-                                    ? whiteColor
-                                    : blackColor,
-                          );
-                        },
-                      ),
+                      color: textFieldColor,
+                      padding: EdgeInsets.all(12),
+                      child: Icon(serviceProviders[index].serviceIcon,size: 35,),
                     ),
                   ),
                   Space(8),

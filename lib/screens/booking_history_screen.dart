@@ -13,7 +13,9 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
+      body: lastBooking.isEmpty
+          ? Center(child: Text("No  Data"))
+        : ListView.builder(
         padding: EdgeInsets.all(8.0),
         itemCount: lastBooking.length,
         itemBuilder: (BuildContext context, int index) {

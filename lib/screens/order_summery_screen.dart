@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:home_hub/models/active_bookings_model.dart';
 import 'package:home_hub/models/combos_services_model.dart';
 import 'package:home_hub/models/renovate_services_model.dart';
@@ -41,9 +43,50 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
   int itemCount = 1;
   int totprice = 0;
   late int highprice;
+  Position? _currentlocation;
+  late bool _serviceEnabled;
+  late LocationPermission _permission;
+  String _currentaddress = '';
+
+  Future<void> _getLocation() async {
+    _serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!_serviceEnabled) {
+      print('Location services are disabled.');
+      return;
+    }
+
+    _permission = await Geolocator.checkPermission();
+    if (_permission == LocationPermission.denied) {
+      _permission = await Geolocator.requestPermission();
+      if (_permission == LocationPermission.denied) {
+        print('Location permissions are denied.');
+        return;
+      }
+    }
+
+    _currentlocation = await Geolocator.getCurrentPosition();
+    _getAddress();
+  }
+
+  Future<void> _getAddress() async {
+    if (_currentlocation != null) {
+      try {
+        List<Placemark> placemarks =
+        await placemarkFromCoordinates(_currentlocation!.latitude, _currentlocation!.longitude);
+        Placemark place = placemarks.first;
+        setState(() {
+          _currentaddress =
+          '${place.postalCode}, ${place.locality}, ${place.administrativeArea}, ${place.country}';
+        });
+      } catch (e) {
+        print('Error fetching address: $e');
+      }
+    }
+  }
 
   @override
   void initState() {
+    _getLocation();
     if (!widget.fromBooking) {
       if (widget.fromRenovate) {
         widget.list[0].serviceName = renovateServices[widget.renovateIndex].title;
@@ -53,7 +96,7 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
         widget.list[0].serviceImage = combosServices[widget.renovateIndex].imagePath!;
       }
     }
-    totprice = widget.price + 40 - 160;
+    totprice = widget.price + 160 - 160;
     highprice = totprice;
     super.initState();
   }
@@ -104,7 +147,8 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
                           builder: (context) => PaymentScreen(
                             weekday: widget.weekday == "" ? "Thursday" : widget.weekday,
                             list: widget.list,
-                            name:widget.name,
+                            name:widget.list[index].serviceName,
+                            providername:widget.name,
                           ),
                         ),
                       );
@@ -188,70 +232,13 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
                             )
                           ],
                         ),
-                        Container(
-                          padding: EdgeInsets.all(3),
-                          decoration: BoxDecoration(
-                            borderRadius: (BorderRadius.circular(5)),
-                            border: Border.all(width: 1, color: itemCountContainerBorder),
-                            color: itemCountContainer,
-                          ),
-                          child: Row(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  if (itemCount != 1) {
-                                    itemCount--;
-                                    setState(() {});
-                                  }
-                                },
-                                child: Padding(padding: EdgeInsets.all(2.0), child: Icon(Icons.remove, color: blackColor, size: 16)),
-                              ),
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 3),
-                                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(3), color: whiteColor),
-                                child: Text(itemCount.toString(), style: TextStyle(color: blackColor, fontSize: 16)),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  itemCount++;
-                                  setState(() {});
-                                },
-                                child: Padding(padding: EdgeInsets.all(2.0), child: Icon(Icons.add, color: blackColor, size: 16)),
-                              ),
-                            ],
-                          ),
-                        ),
                       ],
                     ),
                     Space(28),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        IntrinsicHeight(
-                          child: Row(
-                            children: [
-                              Text(
-                                widget.area != "" ? "${widget.area} Sqft" : "1000 Sqft",
-                                style: TextStyle(
-                                  color: appData.isDark ? cardTextDark : cardText,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              VerticalDivider(thickness: 2, color: appData.isDark ? cardTextDark : cardText),
-                              Text(
-                                widget.bHK != "" ? widget.bHK : "1 BHK",
-                                style: TextStyle(
-                                  color: appData.isDark ? cardTextDark : cardText,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                         Text("₹${widget.price}", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
                       ],
                     ),
@@ -280,7 +267,7 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
                           ),
                           Space(4),
                           Text(
-                            "2nd Street,Shushruthi Nagar,E City",
+                            "$_currentaddress",
                             textAlign: TextAlign.start,
                             style: TextStyle(
                               color: appData.isDark ? cardTextDark : cardText,
@@ -290,8 +277,6 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
                         ],
                       ),
                     ),
-                    Space(8),
-                    Icon(Icons.edit, size: 20),
                   ],
                 ),
               ),
@@ -356,7 +341,7 @@ class _OrderSummeryScreenState extends State<OrderSummeryScreen> {
                             textAlign: TextAlign.start,
                             style: TextStyle(color: appData.isDark ? cardTextDark : cardText, fontWeight: FontWeight.bold, fontSize: 14),
                           ),
-                          trailing: Text("₹40", textAlign: TextAlign.start, style: TextStyle(fontSize: 14)),
+                          trailing: Text("+ ₹160", textAlign: TextAlign.start, style: TextStyle(fontSize: 14)),
                         ),
                         ListTile(
                           title: Text(

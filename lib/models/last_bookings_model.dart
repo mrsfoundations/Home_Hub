@@ -19,15 +19,15 @@ class LastBookingsModel {
 
 List<LastBookingsModel> getLastBooking() {
   List<LastBookingsModel> list = List.empty(growable: true);
-  list.add(
-    LastBookingsModel(0, "Full House Cleaning", "Jaylon Cleaning Services", "Jan 4,2022", "4am", "Completed", 2599),
-  );
-  list.add(
-    LastBookingsModel(1, "Kitchen Cleaning", "Sj Cleaning Services", "Dec 4,2022", "6am", "Cancelled", 3000),
-  );
-  list.add(
-    LastBookingsModel(2, "Bedroom Cleaning", "John Cleaning Services", "Feb 17,2022", "6am", "Completed", 2499),
-  );
+  // list.add(
+  //   LastBookingsModel(0, "Full House Cleaning", "Jaylon Cleaning Services", "Jan 4,2022", "4am", "Completed", 2599),
+  // );
+  // list.add(
+  //   LastBookingsModel(1, "Kitchen Cleaning", "Sj Cleaning Services", "Dec 4,2022", "6am", "Cancelled", 3000),
+  // );
+  // list.add(
+  //   LastBookingsModel(2, "Bedroom Cleaning", "John Cleaning Services", "Feb 17,2022", "6am", "Completed", 2499),
+  // );
   return list;
 }
 

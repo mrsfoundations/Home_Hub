@@ -15,7 +15,7 @@ class _ActiveBookingsScreenState extends State<ActiveBookingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: activeBooking.isEmpty
-          ? Center(child: Text("No  Data"))
+          ? Center(child: Text("No Booking"))
           : ListView.builder(
               padding: EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 16),
               itemCount: activeBooking.length,

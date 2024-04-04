@@ -80,28 +80,11 @@ class LastBookingScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 14, color: greyColor),
               ),
               Space(32),
-              Text(
-                cancel ? "Service Name" : "Service Name $name",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14, color: greyColor),
-              ),
-              Space(32),
-              Text(
-                cancel ? "Service Provider" : "Service Provider $serviceprovider",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14, color: greyColor),
-              ),
               Visibility(
                 visible: cancel ? false : true,
                 child: Column(
                   children: [
                     Space(8),
-                    Text(
-                      "You will get an email with the booking details",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 14, color: Colors.grey),
-                    ),
-                    Space(32),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,

@@ -29,7 +29,6 @@ class _ServiceProvidersScreenState extends State<ServiceProvidersScreen> {
       setState(() {});
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,7 +173,8 @@ class _ServiceProvidersScreenState extends State<ServiceProvidersScreen> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => ProviderServicesScreen(serviceIndex: widget.index, index: index),
+                                            builder: (context) => ProviderServicesScreen(serviceIndex: widget.index,index:index,providername: serviceProviders[widget.index].serviceProviders[index].name,
+                                            ),
                                           ),
                                         );
                                       },

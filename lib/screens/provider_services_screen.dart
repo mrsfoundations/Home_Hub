@@ -9,9 +9,10 @@ import '../utils/images.dart';
 
 class ProviderServicesScreen extends StatefulWidget {
   final int serviceIndex;
+  final String providername;
   final int index;
 
-  const ProviderServicesScreen({Key? key, required this.index, required this.serviceIndex}) : super(key: key);
+  const ProviderServicesScreen({Key? key, required this.providername, required this.serviceIndex,required this.index}) : super(key: key);
 
   @override
   State<ProviderServicesScreen> createState() => _ProviderServicesScreenState();
@@ -56,57 +57,6 @@ class _ProviderServicesScreenState extends State<ProviderServicesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomSheet: BottomSheet(
-      //   elevation: 10,
-      //   enableDrag: false,
-      //   builder: (context) {
-      //     return Padding(
-      //       padding: EdgeInsets.all(8),
-      //       child: Row(
-      //         children: [
-      //           // Expanded(
-      //           //   child: OutlinedButton(
-      //           //     style: OutlinedButton.styleFrom(
-      //           //       fixedSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.06),
-      //           //       foregroundColor: appData.isDark ? whiteColor : blackColor,
-      //           //       shape: StadiumBorder(),
-      //           //       side: BorderSide(color: appData.isDark ? whiteColor : blackColor, width: 1),
-      //           //     ),
-      //           //     child: Icon(Icons.message_rounded),
-      //           //     onPressed: () {
-      //           //       //
-      //           //     },
-      //           //   ),
-      //           // ),
-      //           // Space(16),
-      //           // Expanded(
-      //           //   child: ElevatedButton(
-      //           //     style: ElevatedButton.styleFrom(
-      //           //       fixedSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.06),
-      //           //       shape: StadiumBorder(),
-      //           //     ),
-      //           //     child: Text("Book", style: TextStyle(fontWeight: FontWeight.bold)),
-      //           //     onPressed: () {
-      //           //       Navigator.push(
-      //           //         context,
-      //           //         MaterialPageRoute(
-      //           //           builder: (context) => ServiceScreen(
-      //           //             index: serviceProviders[widget.serviceIndex].serviceProviders[widget.index].providerServices.length - 1,
-      //           //             fromBooking: true,
-      //           //             serviceIndex: widget.serviceIndex,
-      //           //             providerIndex: widget.index,
-      //           //           ),
-      //           //         ),
-      //           //       );
-      //           //     },
-      //           //   ),
-      //           // ),
-      //         ],
-      //       ),
-      //     );
-      //   },
-      //   onClosing: () {},
-      // ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -146,6 +96,7 @@ class _ProviderServicesScreenState extends State<ProviderServicesScreen> {
                             fromBooking: true,
                             serviceIndex: widget.serviceIndex,
                             providerIndex: widget.index,
+                              providername:widget.providername,
                           ),
                         ));
                   },

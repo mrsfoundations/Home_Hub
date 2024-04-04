@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_hub/components/payment_container.dart';
 import 'package:home_hub/screens/last_booking_screen.dart';
-
 import '../custom_widget/space.dart';
 import '../main.dart';
 import '../models/active_bookings_model.dart';
@@ -10,10 +9,11 @@ import '../utils/colors.dart';
 class PaymentScreen extends StatefulWidget {
   final String weekday;
   final String name;
+  final String providername;
 
   final List<ActiveBookingsModel> list;
 
-  const PaymentScreen({Key? key, required this.list, required this.weekday, required this.name}) : super(key: key);
+  const PaymentScreen({Key? key, required this.list, required this.weekday, required this.name, required this.providername}) : super(key: key);
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -80,7 +80,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             weekday: widget.weekday,
                             date: widget.list[0].date,
                             time: widget.list[0].time,
-                            // serviceName:widget.list[0].serviceName,
+                            serviceprovider:widget.providername,
                             name:widget.name,
                           ),
                         ),

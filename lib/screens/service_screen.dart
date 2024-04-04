@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:home_hub/components/apartment_size_component.dart';
@@ -6,8 +7,7 @@ import 'package:home_hub/models/active_bookings_model.dart';
 import 'package:home_hub/models/combos_services_model.dart';
 import 'package:home_hub/models/renovate_services_model.dart';
 import 'package:home_hub/utils/date.dart' as date;
-import 'package:home_hub/utils/widgets.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../custom_widget/space.dart';
 import '../models/services_model.dart';
 import '../utils/colors.dart';
@@ -19,13 +19,17 @@ class ServiceScreen extends StatefulWidget {
   final bool fromBooking;
   final int serviceIndex;
   final int providerIndex;
+  final String providername;
+
   const ServiceScreen({
     Key? key,
-    this.index = 0,
+    required this.index,
     this.fromRenovate = false,
     this.fromBooking = false,
     this.serviceIndex = 0,
     this.providerIndex = 0,
+    this.providername = 'Arul',
+
   }) : super(key: key);
 
   @override
@@ -116,6 +120,50 @@ class _ServiceScreenState extends State<ServiceScreen> {
       setState(() {});
     }
   }
+  void storeBookingData() async {
+    try {
+      // Access the Firestore instance
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      // Define the data to be stored
+      Map<String, dynamic> bookingData = {
+        'serviceName': serviceProviders[widget.serviceIndex]
+            .serviceProviders[widget.providerIndex]
+            .providerServices[widget.index]
+            .serviceName,
+        'providerName': widget.providername,
+        'selectedDate': selectedDate,
+        'selectedTime': _time.format(context),
+        'status': 'In Process',
+        'servicePrice': serviceProviders[widget.serviceIndex]
+            .serviceProviders[widget.providerIndex]
+            .providerServices[widget.index]
+            .servicePrice,
+        'day':selectedWeekday,
+      };
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        String uid = user.uid;
+
+        DocumentReference docRef = firestore
+            .collection('Booking Data')
+            .doc('Active Data')
+            .collection('UID')
+            .doc(uid)
+            .collection('Date')
+            .doc(DateTime.now().toString());
+
+        await docRef.set(bookingData);
+
+        print('Uploaded Successfully');
+      } else {
+        print('No user signed in');
+      }
+    } catch (e) {
+      print('Error storing data: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -147,12 +195,13 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   ),
                   TextButton(
                     onPressed: () {
+                      storeBookingData();
                       temporaryList.add(
                         ActiveBookingsModel(
                           0,
                           serviceProviders[widget.serviceIndex].serviceProviders[widget.providerIndex].providerServices[widget.index].serviceName,
                           serviceProviders[widget.serviceIndex].serviceProviders[widget.providerIndex].providerServices[widget.index].serviceImage,
-                          "John Cleaning Services",
+                          widget.providername,
                           selectedDate,
                           _time.format(context),
                           "In Process",
@@ -170,8 +219,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
                             fromBooking: widget.fromBooking,
                             renovateIndex: widget.index,
                             fromRenovate: widget.fromRenovate,
-                            name:serviceProviders[widget.index].serviceProviders[0].name,
-                            price:serviceProviders[widget.serviceIndex].serviceProviders[widget.providerIndex].providerServices[widget.index].servicePrice,
+                            name: widget.providername,
+                            price: serviceProviders[widget.serviceIndex].serviceProviders[widget.providerIndex].providerServices[widget.index].servicePrice,
                           ),
                         ),
                       );
@@ -231,25 +280,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text("Apartment Size", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                  Space(16),
-                  ApartmentSizeComponent(),
-                  Space(16),
-                  Text("Area in Sqft", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                  Space(16),
-                  TextField(
-                    keyboardType: TextInputType.number,
-                    style: TextStyle(fontSize: 16),
-                    inputFormatters: [LengthLimitingTextInputFormatter(4)],
-                    decoration: commonInputDecoration(
-                      hintText: "Area in  squre fit",
-                      suffixIcon: Icon(Icons.add, size: 16),
-                    ),
-                    onChanged: (value) {
-                      selectedArea = value;
-                    },
-                  ),
-                  Space(16),
                   Text("Pick a date", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                   Space(16),
                   Row(

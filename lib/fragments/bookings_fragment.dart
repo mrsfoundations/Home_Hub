@@ -43,23 +43,24 @@ class _BookingsFragmentState extends State<BookingsFragment> with SingleTickerPr
           textAlign: TextAlign.center,
           style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
         ),
-        bottom: TabBar(
-          controller: bookingTabController,
-          labelStyle: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
-          indicatorColor: blackColor,
-          tabs: [
-            Tab(text: "Active"),
-            Tab(text: "History"),
-          ],
-        ),
+      //   bottom: TabBar(
+      //     controller: bookingTabController,
+      //     labelStyle: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
+      //     indicatorColor: blackColor,
+      //     tabs: [
+      //       Tab(text: "Active"),
+      //       Tab(text: "History"),
+      //     ],
+      //   ),
       ),
-      body: TabBarView(
-        controller: bookingTabController,
-        children: [
+      body:
+    // TabBarView(
+      //   controller: bookingTabController,
+      //   children: [
           ActiveBookingsScreen(),
-          BookingHistoryScreen(),
-        ],
-      ),
+      //     BookingHistoryScreen(),
+      //   ],
+      // ),
     );
   }
 }

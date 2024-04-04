@@ -11,15 +11,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'store/appData.dart';
 import 'package:get/get.dart';
-// import 'package:get_storage/get_storage.dart';
 
 AppData appData = AppData();
-
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
-  // await GetStorage.init();
   runApp(MyApp());
 }
 
@@ -113,24 +110,19 @@ class MyApp extends StatelessWidget {
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                // Display a circular progress indicator while waiting for the connection.
                 return Center(child: CircularProgressIndicator());
               }
-
               if (snapshot.hasError) {
-                // Handle error case, you can display an error message or redirect the user.
                 return Text("Error: ${snapshot.error}");
               }
-
               if (snapshot.data == null) {
-                // User not authenticated, show SignUp screen.
                 return SplashScreen();
               } else {
-                // User authenticated, show HomePage.
                 return DashBoardScreen();
               }
             },
           ),
+          // TestScreen()
         );
       },
     );

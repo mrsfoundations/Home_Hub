@@ -21,131 +21,55 @@ class ServiceProviderModel {
 
 List<ServiceProviderModel> getPlumbers() {
   List<ServiceProviderModel> list = List.empty(growable: true);
-  list.add(ServiceProviderModel(0, "Mohammed Ali", plumber, "Plumbers", "3.5", "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.", "120", "330", false, getProviderServices(),));
-  list.add(ServiceProviderModel(0, "Aathif", homeCleaner, "Home Clean", "3.5", "Hi", "120", "350", false, getProviderServices()));
-  list.add(ServiceProviderModel(0, "Shami", plumber, "Plumbers", "4.5", "Hi", "120", "250", false, getProviderServices()));
-  list.add(ServiceProviderModel(0, "Shahul", electrician, "Electrician", "4.0", "Hi", "120", "310", false, getProviderServices()));
+  list.add(ServiceProviderModel(0, "Mohammed Ali", plumber, "Plumbers", "3.5", "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.", "120", "330", false, getPlumberProviderServices(),));
+  list.add(ServiceProviderModel(0, "Aathif", plumber, "Plumbers", "3.5", "Hi", "120", "350", false, getPlumberProviderServices()));
+  list.add(ServiceProviderModel(0, "Shami", plumber, "Plumbers", "4.5", "Hi", "120", "250", false, getPlumberProviderServices()));
+  list.add(ServiceProviderModel(0, "Shahul", plumber, "Plumbers", "4.0", "Hi", "120", "310", false, getPlumberProviderServices()));
   return list;
 }
 
 List<ServiceProviderModel> getElectricians() {
   List<ServiceProviderModel> list = List.empty(growable: true);
-  list.add(ServiceProviderModel(1, "Mani Kandan", electrician, "Electrician", "3.5", "Hi", "120", "250", false, getProviderServices()));
-  list.add(ServiceProviderModel(1, "Aravindh", painter1, "painter", "3.5", "Hi", "120", "150", false, getProviderServices()));
-  list.add(ServiceProviderModel(1, "Pravin kanth", homeCleaner, "Home Clean", "4.5", "Hi", "120", "220", false, getProviderServices()));
-  list.add(ServiceProviderModel(1, "Hari", plumber, "plumber", "4.0", "Hi", "120", "220", false, getProviderServices()));
-  return list;
-}
-
-List<ServiceProviderModel> getPainters() {
-  List<ServiceProviderModel> list = List.empty(growable: true);
-  list.add(ServiceProviderModel(2, "Michel smith", painter, "Painters", "3.5", "Hi", "120", "450", false, getProviderServices()));
-  list.add(ServiceProviderModel(2, "Michel smith", painter1, "Painters", "3.5", "Hi", "120", "550", false, getProviderServices()));
-  list.add(ServiceProviderModel(2, "John carter", painter, "Painters", "4.5", "Hi", "120", "500", false, getProviderServices()));
-  list.add(ServiceProviderModel(2, "Carry John", painter, "Electrician", "4.0", "Hi", "120", "550", false, getProviderServices()));
-  return list;
-}
-
-List<ServiceProviderModel> getCarpenters() {
-  List<ServiceProviderModel> list = List.empty(growable: true);
-  list.add(ServiceProviderModel(3, "Arul", carpenter, "Carpenters", "3.5", "Hi", "120", "150", false, getProviderServices()));
-  list.add(ServiceProviderModel(3, "Thiyagu", carpenter, "Carpenters", "3.5", "Hi", "120", "100", false, getProviderServices()));
-  list.add(ServiceProviderModel(3, "Cheran", carpenter, "Carpenters", "4.5", "Hi", "120", "250", false, getProviderServices()));
-  list.add(ServiceProviderModel(3, "Arul", carpenter, "Carpenters", "4.0", "Hi", "120", "190", false, getProviderServices()));
+  list.add(ServiceProviderModel(1, "Mani Kandan", electrician, "Electrician", "3.5", "Hi", "120", "250", false, getElectricianProviderServices()));
+  list.add(ServiceProviderModel(1, "Aravindh", electrician, "Electrician", "3.5", "Hi", "120", "150", false, getElectricianProviderServices()));
+  list.add(ServiceProviderModel(1, "Pravin kanth", electrician, "Electrician", "4.5", "Hi", "120", "220", false, getElectricianProviderServices()));
+  list.add(ServiceProviderModel(1, "Hari", electrician, "Electrician", "4.0", "Hi", "120", "220", false, getElectricianProviderServices()));
   return list;
 }
 
 List<ServiceProviderModel> getHomeCleaning() {
   List<ServiceProviderModel> list = List.empty(growable: true);
-  list.add(ServiceProviderModel(
-    4,
-    "John Smith",
-    homeCleaner,
-    "Home Cleaning",
-    "3.5",
-    "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.",
-    "1000",
-    "150",
-    true,
-    getProviderServices(),
+  list.add(ServiceProviderModel(4, "John Smith", homeCleaner, "Cleaning", "3.5", "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.", "1000", "150", true, getCleaningProviderServices(),));
+  list.add(ServiceProviderModel(4, "Carry Lain", homeCleaner, "Cleaning", "3.5", "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.", "125", "100", false, getCleaningProviderServices(),));
+  list.add(ServiceProviderModel(4, "John Carter", homeCleaner, "Cleaning", "4.5", "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.", "79", "250", false, getCleaningProviderServices(),));
+  list.add(ServiceProviderModel(4, "Marry John", homeCleaner, "Cleaning", "4.0", "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.", "90", "190", true, getCleaningProviderServices(),));
+  list.add(ServiceProviderModel(4, "Harry Potter", homeCleaner, "Cleaning", "4.0", "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.", "100", "190", false, getCleaningProviderServices(),
   ));
-  list.add(ServiceProviderModel(
-    4,
-    "Carry Lain",
-    painter,
-    "Home Painter",
-    "3.5",
-    "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.",
-    "125",
-    "100",
-    false,
-    getProviderServices(),
-  ));
-  list.add(ServiceProviderModel(
-    4,
-    "John Carter",
-    plumber,
-    "Home plumber",
-    "4.5",
-    "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.",
-    "79",
-    "250",
-    false,
-    getProviderServices(),
-  ));
-  list.add(ServiceProviderModel(
-    4,
-    "Marry John",
-    homeCleaner,
-    "Home Cleaning",
-    "4.0",
-    "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.",
-    "90",
-    "190",
-    true,
-    getProviderServices(),
-  ));
-  list.add(ServiceProviderModel(
-    4,
-    "Harry Potter",
-    painter1,
-    "Home Painter",
-    "4.0",
-    "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.",
-    "100",
-    "190",
-    false,
-    getProviderServices(),
-  ));
+  return list;
+}
+
+List<ServiceProviderModel> getPainters() {
+  List<ServiceProviderModel> list = List.empty(growable: true);
+  list.add(ServiceProviderModel(2, "Michel smith", painter, "Painters", "3.5", "Hi", "120", "450", false, getPaintingProviderServices()));
+  list.add(ServiceProviderModel(2, "Michel smith", painter, "Painters", "3.5", "Hi", "120", "550", false, getPaintingProviderServices()));
+  list.add(ServiceProviderModel(2, "John carter", painter, "Painters", "4.5", "Hi", "120", "500", false, getPaintingProviderServices()));
+  list.add(ServiceProviderModel(2, "Carry John", painter, "Painters", "4.0", "Hi", "120", "550", false, getPaintingProviderServices()));
+  return list;
+}
+
+List<ServiceProviderModel> getCarpenters() {
+  List<ServiceProviderModel> list = List.empty(growable: true);
+  list.add(ServiceProviderModel(3, "Arul", carpenter, "Carpenters", "3.5", "Hi", "120", "150", false, getCarpentersProviderServices()));
+  list.add(ServiceProviderModel(3, "Thiyagu", carpenter, "Carpenters", "3.5", "Hi", "120", "100", false, getCarpentersProviderServices()));
+  list.add(ServiceProviderModel(3, "Cheran", carpenter, "Carpenters", "4.5", "Hi", "120", "250", false, getCarpentersProviderServices()));
+  list.add(ServiceProviderModel(3, "Arul", carpenter, "Carpenters", "4.0", "Hi", "120", "190", false, getCarpentersProviderServices()));
   return list;
 }
 
 List<ServiceProviderModel> getLikedServices() {
   List<ServiceProviderModel> list = List.empty(growable: true);
-  list.add(ServiceProviderModel(
-    0,
-    "John Smith",
-    homeCleaner,
-    "Home Cleaning",
-    "3.5",
-    "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.",
-    "1000",
-    "150",
-    true,
-    getProviderServices(),
-  ));
-  list.add(ServiceProviderModel(
-    1,
-    "Marry John",
-    painter,
-    "Home Painting",
-    "4.0",
-    "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.",
-    "90",
-    "190",
-    true,
-    getProviderServices(),
-  ));
+  list.add(ServiceProviderModel(0, "John Smith", homeCleaner, "Home Cleaning", "3.5", "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.", "1000", "150", true, getProviderServices(),));
+  list.add(ServiceProviderModel(1, "Marry John", painter, "Home Painting", "4.0", "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.", "90", "190", true, getProviderServices(),));
   return list;
 }
 

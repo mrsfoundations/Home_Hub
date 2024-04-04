@@ -71,7 +71,8 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ProviderServicesScreen(serviceIndex: widget.serviceIndex, index: widget.index),
+                            builder: (context) => ProviderServicesScreen(serviceIndex: widget.serviceIndex, index: widget.index,providername:serviceProviders[widget.serviceIndex].serviceProviders[widget.index].name,
+                            ),
                           ),
                         );
                       },

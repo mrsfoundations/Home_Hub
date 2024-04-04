@@ -42,13 +42,13 @@ class _HomeConstructionComponentState extends State<HomeConstructionComponent> {
               );
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(40),
                     child: Container(
-                      padding: EdgeInsets.all(16),
+                      padding: EdgeInsets.all(12),
                       color: textFieldColor,
                       child: homeConstruction[index].iconPath,
                     ),

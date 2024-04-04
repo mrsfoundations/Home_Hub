@@ -18,7 +18,7 @@ class CancelBookingScreen extends StatefulWidget {
 class _CancelBookingScreenState extends State<CancelBookingScreen> {
   String? refundMethod;
   String? reasonForCancel;
-  int itemCount = 1;
+  // int itemCount = 1;
 
   Future<void> _showAlertDialog() async {
     return showDialog<void>(
@@ -39,7 +39,7 @@ class _CancelBookingScreenState extends State<CancelBookingScreen> {
               child: Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pop();
+                // Navigator.of(context).pop();
               },
             ),
           ],
@@ -164,42 +164,42 @@ class _CancelBookingScreenState extends State<CancelBookingScreen> {
                                   )
                                 ],
                               ),
-                              Container(
-                                padding: EdgeInsets.all(3),
-                                decoration: BoxDecoration(
-                                  borderRadius: (BorderRadius.circular(5)),
-                                  border: Border.all(width: 1, color: itemCountContainerBorder),
-                                  color: itemCountContainer,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.remove, color: blackColor, size: 16),
-                                    Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 3),
-                                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(3), color: whiteColor),
-                                      child: Text(itemCount.toString(), style: TextStyle(color: blackColor, fontSize: 16)),
-                                    ),
-                                    Icon(Icons.add, color: blackColor, size: 16),
-                                  ],
-                                ),
-                              ),
+                              // Container(
+                              //   padding: EdgeInsets.all(3),
+                              //   decoration: BoxDecoration(
+                              //     borderRadius: (BorderRadius.circular(5)),
+                              //     border: Border.all(width: 1, color: itemCountContainerBorder),
+                              //     color: itemCountContainer,
+                              //   ),
+                              //   child: Row(
+                              //     children: [
+                              //       Icon(Icons.remove, color: blackColor, size: 16),
+                              //       Container(
+                              //         margin: EdgeInsets.symmetric(horizontal: 3),
+                              //         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                              //         decoration: BoxDecoration(borderRadius: BorderRadius.circular(3), color: whiteColor),
+                              //         child: Text(itemCount.toString(), style: TextStyle(color: blackColor, fontSize: 16)),
+                              //       ),
+                              //       Icon(Icons.add, color: blackColor, size: 16),
+                              //     ],
+                              //   ),
+                              // ),
                             ],
                           ),
-                          Space(42),
+                          Space(15),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              IntrinsicHeight(
-                                child: Row(
-                                  children: [
-                                    Text("1590 Sqft", style: TextStyle(color: greyColor, fontSize: 14, fontWeight: FontWeight.w500)),
-                                    VerticalDivider(thickness: 2, color: greyColor),
-                                    Text("3BHK", style: TextStyle(color: greyColor, fontSize: 14, fontWeight: FontWeight.w500)),
-                                  ],
-                                ),
-                              ),
+                              // IntrinsicHeight(
+                              //   child: Row(
+                              //     children: [
+                              //       Text("1590 Sqft", style: TextStyle(color: greyColor, fontSize: 14, fontWeight: FontWeight.w500)),
+                              //       VerticalDivider(thickness: 2, color: greyColor),
+                              //       Text("3BHK", style: TextStyle(color: greyColor, fontSize: 14, fontWeight: FontWeight.w500)),
+                              //     ],
+                              //   ),
+                              // ),
                               Text(
                                 "₹${activeBooking[widget.activeId].price.toString()}",
                                 style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),

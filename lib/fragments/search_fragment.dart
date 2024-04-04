@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:home_hub/components/search_component.dart';
-import 'package:home_hub/utils/widgets.dart';
-
 import '../models/services_model.dart';
 import '../utils/colors.dart';
 
@@ -30,19 +28,6 @@ class _SearchFragmentState extends State<SearchFragment> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Padding(
-            //   padding: EdgeInsets.symmetric(horizontal: 16),
-            //   child: Form(
-            //     child: TextFormField(
-            //       keyboardType: TextInputType.name,
-            //       style: TextStyle(fontSize: 17),
-            //       decoration: commonInputDecoration(
-            //         hintText: "Search for services",
-            //         suffixIcon: Icon(Icons.search, size: 18),
-            //       ),
-            //     ),
-            //   ),
-            // ),
             ListView.builder(
               shrinkWrap: true,
               primary: false,
