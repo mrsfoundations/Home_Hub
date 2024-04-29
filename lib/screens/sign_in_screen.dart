@@ -1,23 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_calling_code_picker/picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:home_hub/screens/Privacy_Policy.dart';
 import 'package:home_hub/screens/Terms_&_Conditions.dart';
 import 'package:home_hub/screens/dashboard_screen.dart';
-import 'package:home_hub/screens/otp_verification_screen.dart';
-import 'package:home_hub/screens/sign_up_screen.dart';
 import 'package:home_hub/screens/user_generated_content_policy.dart';
 import 'package:home_hub/utils/constant.dart';
-import 'package:home_hub/utils/widgets.dart';
 import 'package:lottie/lottie.dart';
-
 import '../custom_widget/space.dart';
 import '../main.dart';
-import '../utils/colors.dart';
 import '../utils/images.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -157,14 +151,35 @@ class _SignInScreenState extends State<SignInScreen> {
       print('error during loggin in : $e');
     }
   }
-  authenticateWithGoogle() async{
-    GoogleSignInAccount? googleuser =await GoogleSignIn().signIn();
-    GoogleSignInAuthentication? googleAuth = await googleuser?.authentication;
-    AuthCredential credential = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
-    UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-    print(userCredential.user?.displayName);
-    if(userCredential.user  != null){
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DashBoardScreen()));
+  void fetchUID(String displayName, String uid, String email) async {
+    try {
+      final profileRef = FirebaseFirestore.instance.collection('Profile').doc(uid);
+      await profileRef.set({
+        'UserEmailID': email,
+        'Name': displayName,
+        'Address': '',
+      }, SetOptions(merge: true));
+    } catch (e) {
+      print('Error fetching UID: $e');
+    }
+  }
+  void authenticateWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+      final UserCredential userCredential = await _auth.signInWithCredential(credential);
+
+      final displayName = userCredential.user?.displayName;
+      final uid = userCredential.user?.uid;
+      final email = userCredential.user?.email;
+
+      if (displayName != null && uid != null && email != null) {
+        fetchUID(displayName, uid, email);
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => DashBoardScreen()));
+      }
+    } catch (e) {
+      print('Error authenticating with Google: $e');
     }
   }
 }

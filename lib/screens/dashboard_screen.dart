@@ -18,8 +18,8 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   DateTime? _currentBackPressTime;
   late String uid = "";
-  String? email;
-  String? name;
+  // String? email;
+  // String? name;
   Position? _currentlocation;
   late bool _serviceEnabled;
   late LocationPermission _permission;
@@ -73,15 +73,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     if (user != null) {
       setState(() {
         uid = user.uid;
-        email = user.email;
-        name = user.displayName;
+        // email = user.email;
+        // name = user.displayName;
       });
       final profileRef = FirebaseFirestore.instance.collection('Profile').doc(uid);
-      await profileRef.set({
-        'UserEmailID': email,
-        'Name': name,
+      await profileRef.update({
+        // 'UserEmailID': email,
+        // 'Name': name,
         'Address': _currentaddress,
-      }, SetOptions(merge: true));
+      },);
     }
   }
 
